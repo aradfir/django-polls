@@ -1,0 +1,14 @@
+<strong> Result for "{{ q.text }}"</strong>
+<p>There were {{ total_votes }} votes in total.</p>
+{% if winner == None %}
+    <p>There were no winners!</p>
+{% else %}
+    <p>The winner was "{{ winner.text }}" with {{ winner.votes }} votes!"</p>
+{% endif %}
+<p>____________________________</p>
+{% for choice in q.choice_set.all %}
+    <p>{{ choice.text }} => {{ choice.votes }} votes.</p>
+{% endfor %}
+<a href="{% url 'detail' q.id %}">Go back to details</a><br/>
+<a href="{% url 'index' %}">Go to homepage</a><br/>
+<a href="{% url 'log_out' %}">Log Out</a>

@@ -1,0 +1,8 @@
+{% if username %}
+    <p>Welcome to polls, {{ username }}!</p>
+    <a href="{% url 'index' %}">Go to homepage</a><br/>
+{% else %}
+    <p>Incorrect username/password combination!</p>
+    <a href="{% url 'login_form' %}">Retry</a><br/>
+    <a href="{% url 'index' %}">Go to homepage</a><br/>
+{% endif %}

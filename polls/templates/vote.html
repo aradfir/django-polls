@@ -1,0 +1,10 @@
+{% if choice_text %}
+    <p>You voted for <b>"{{ choice_text }}"</b> in <b>"{{ q.text }}"</b> successfully! </p><br/>
+    {% else %}
+    <p>You didnt select an option!</p>
+{% endif %}
+
+<a href="{% url 'detail' q.id %}">Vote again</a><br/>
+<a href="{% url 'result' q.id %}">View Result</a><br/>
+<a href="{% url 'index' %}">Go to homepage</a><br/>
+<a href="{% url 'log_out' %}">Log Out</a>

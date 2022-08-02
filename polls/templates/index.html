@@ -1,0 +1,18 @@
+{% load static %}
+<style>
+body {
+  background-image: url({% static 'index.png' %});
+  background-repeat: no-repeat;
+}
+</style>
+<strong> Welcome to polls!</strong>
+<div >
+<form action="{% url 'index' %}" method="get">
+  <input name="search" type="text" placeholder="Search...">
+</form>
+<ul >
+{%for o in recent_questions%}
+    <li> <a href="{% url "detail" o.id %}">{{ o.id }}</a> - {{ o.text }}</li>
+{% endfor %}
+</ul>
+</div>
