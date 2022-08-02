@@ -117,25 +117,27 @@ def do_login(request):
         return render(request, 'login_response.html')
 
 
-from .forms import RegisterForm
+from .forms import RegisterForm,RegisterForm2
 from django.contrib.auth.models import User
 
 
 @require_http_methods(['POST', 'GET'])
 def register_form(request):
     if request.method == "POST":
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            new_user = User.objects.create_user(username=form.cleaned_data.get('user_name'),
-                                                email=form.cleaned_data.get('email'),
-                                                password=form.cleaned_data.get('password'))
-            new_user.first_name = form.cleaned_data.get('first_name')
-            new_user.last_name = form.cleaned_data.get('last_name')
-            new_user.save()
-            login(request, new_user)
-            return HttpResponse("You have registered successfully!")
+        form = RegisterForm2(request.POST)
+        new_user = form.save()
+        login(request, new_user)
+        return HttpResponse("You have registered successfully and have been automatically logged in!")
+        # if form.is_valid():
+            # new_user = User.objects.create_user(username=form.cleaned_data.get('user_name'),
+            #                                     email=form.cleaned_data.get('email'),
+            #                                     password=form.cleaned_data.get('password'))
+            # new_user.first_name = form.cleaned_data.get('first_name')
+            # new_user.last_name = form.cleaned_data.get('last_name')
+            # new_user.save()
+
     else:
-        form = RegisterForm()
+        form = RegisterForm2()
     return render(request, 'register.html', {'form': form})
 
 

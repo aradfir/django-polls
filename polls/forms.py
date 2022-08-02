@@ -1,4 +1,6 @@
+import django.contrib.auth.models
 from django import forms
+from django.forms import ModelForm
 
 
 class RegisterForm(forms.Form):
@@ -18,3 +20,9 @@ class RegisterForm(forms.Form):
             raise forms.ValidationError(
                 "password and confirm_password does not match"
             )
+
+
+class RegisterForm2(ModelForm):
+    class Meta:
+        model = django.contrib.auth.models.User
+        fields= ['username','password','email','first_name','last_name']
