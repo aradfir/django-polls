@@ -11,8 +11,8 @@ from django.template import loader
 from django.views import generic
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-# from django.utils.decorators import method_decorator
-
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -104,9 +104,6 @@ def login_form(request):
     return render(request, 'login.html')
 
 
-from django.contrib.auth.models import User
-
-
 @require_http_methods(["POST"])
 def do_login(request):
     if request.POST['username'] is None or request.POST['password'] is None or request.POST['username'] == '' or \
@@ -118,10 +115,6 @@ def do_login(request):
         return render(request, 'login_response.html', {'username': user.get_username()})
     else:
         return render(request, 'login_response.html')
-
-
-from django.contrib.auth import logout
-from django.shortcuts import redirect
 
 
 def log_out(request):
